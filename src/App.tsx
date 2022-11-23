@@ -6,10 +6,18 @@ import { trpc } from "./trpc";
 import { httpBatchLink } from "@trpc/client";
 
 const AppContent = () => {
-  const hello = trpc.hello.useQuery();
+  const messages = trpc.getMessages.useQuery();
   return (
     <>
-      <h1>Hello from React client</h1>;<code>{JSON.stringify(hello.data)}</code>
+      <h1>Last 10 messages:</h1>
+      <ul>
+        {messages.data?.map((message, i) => (
+          <li key={i}>
+            <strong>{message.user}: </strong>
+            <span>{message.message}</span>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
