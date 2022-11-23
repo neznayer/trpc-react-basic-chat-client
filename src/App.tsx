@@ -6,7 +6,12 @@ import { trpc } from "./trpc";
 import { httpBatchLink } from "@trpc/client";
 
 const AppContent = () => {
-  return <h1>Hello from React client</h1>;
+  const hello = trpc.hello.useQuery();
+  return (
+    <>
+      <h1>Hello from React client</h1>;<code>{JSON.stringify(hello.data)}</code>
+    </>
+  );
 };
 
 const App = () => {
